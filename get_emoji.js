@@ -12,8 +12,8 @@ https.get(url, function(res){
   res.on('end', function(){
     JSON.parse(body).forEach((d) => {
       // process each emoji to use in cloud natural language
-      const name = d.short_name;
-      const replaced = name.replace(/[_-]/g, ' ');
+      const shortname = d.short_name;
+      const replaced = shortname.replace(/[_-]/g, ' ');
       console.log(replaced + '.');
     });
   });
