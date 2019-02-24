@@ -11,10 +11,12 @@ exports.emojiHeaven = (req_, res_) => {
 
   const postData = querystring.stringify({});
 
+  const payload = JSON.parse(req_.body.payload);
+
   const options = {
     hostname: 'slack.com',
     port: 443,
-    path: '/api/reactions.add?token=' + process.env.SLACK_API_TOKEN + '&channel=CBJQUPCDU&timestamp=1550741144.000200&name=thumbsup',
+    path: '/api/reactions.add?token=' + process.env.SLACK_API_TOKEN + '&channel=' + payload.channel.id + '&timestamp=' + payload.message_ts + '&name=thumbsup',
     method: 'POST',
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded',
