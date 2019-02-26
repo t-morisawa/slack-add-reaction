@@ -1,0 +1,23 @@
+{
+  "name": "slack-add-reaction",
+  "version": "1.0.0",
+  "description": "",
+  "main": "emoji-sentiment.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/t-morisawa/slack-add-reaction.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/t-morisawa/slack-add-reaction/issues"
+  },
+  "homepage": "https://github.com/t-morisawa/slack-add-reaction#readme",
+  "dependencies": {
+    "emoji-datasource": "^4.1.0",
+    "emoji-sentiment": "^3.0.2"
+  }
+}
