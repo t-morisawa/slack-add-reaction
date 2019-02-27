@@ -5,6 +5,26 @@
  * @param {!express:Response} res HTTP response context.
  */
 exports.emojiHeaven = (req_, res_) => {
+  // get good emoji
+  const emojiSentiment = require('emoji-sentiment');
+  const emojiDataSource = require('emoji-datasource');
+
+  const filtered = emojiSentiment.filter((element) => {
+    return (element.score > 0.6);
+  });
+
+  const get_short_name = () => {
+    while (1) {
+      const selected = filtered[Math.floor(Math.random() * filtered.length)].sequence;
+      const matched = emojiDataSource.filter((element) => {
+        return (element.unified == selected);
+      });
+      if (matched.length > 0) {
+        return matched[0].short_name;
+      }
+    }
+  }
+
   const querystring = require('querystring');
   const https = require('https');
   https.request.debug = true;
@@ -16,7 +36,7 @@ exports.emojiHeaven = (req_, res_) => {
   const options = {
     hostname: 'slack.com',
     port: 443,
-    path: '/api/reactions.add?token=' + process.env.SLACK_API_TOKEN + '&channel=' + payload.channel.id + '&timestamp=' + payload.message_ts + '&name=thumbsup',
+    path: '/api/reactions.add?token=' + process.env.SLACK_API_TOKEN + '&channel=' + payload.channel.id + '&timestamp=' + payload.message_ts + '&name=' + get_short_name(),
     method: 'POST',
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded',
